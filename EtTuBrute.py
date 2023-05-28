@@ -25,7 +25,7 @@ import re
 import subprocess
 import platform
 
-
+ 
 class EtTuBrute():
     _keyList = []
     _lowerCase = []
