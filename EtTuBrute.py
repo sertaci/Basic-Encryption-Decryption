@@ -14,7 +14,7 @@ Pi, euler, golden ratio, and planck constant
 Created By  : Sertac İnce
 Created Date: 26/08/2022
 Updated Date: 28/05/2023
-version ='1.314.271.161.662'
+version ='i.314.271.161.662'
 ---------------------------------------------------------------------------
 """
 
