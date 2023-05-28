@@ -22,11 +22,11 @@ version ='i.314.271.161.662'
 import string
 import re
 import subprocess
+import platform
 
 
 def menuPrinter():
-    """Helper function for printing menu.
-    """
+    """Helper function for printing menu."""
 
     print("\n\n" + "*" * 27)
     print("\tCRYPT MENU")
@@ -35,9 +35,8 @@ def menuPrinter():
     print("*" * 27, end="\n\n")
 
 
-def modePrinter(mode : str):
-    """Helper function for printing mode menu.
-    """
+def modePrinter(mode: str):
+    """Helper function for printing mode menu."""
 
     print("\n" + "*" * 27)
     print(f"\t {mode.upper()}")
@@ -45,8 +44,7 @@ def modePrinter(mode : str):
 
 
 def menuOptionCast() -> int:
-    """Check whether the chosen main menu option can be casteble to integer.
-    """
+    """Check whether the chosen main menu option can be casteble to integer."""
 
     try:
         option = int(input("Choose an option: "))
@@ -54,30 +52,28 @@ def menuOptionCast() -> int:
     except:
         print("Wrong option!")
         return -1
-   
-            
-def menuChecker(option : int) -> int:
-    """Check if the option is in the list.
-    """
+
+
+def menuChecker(option: int) -> int:
+    """Check if the option is in the list."""
 
     if option not in [1, 2, 3]:
         print("Wrong option!")
         return -1
-    
+
     elif option == 3:
         exit()
 
     # Returning the crypt or decrypt mode (1 or 2)
-    else:    
+    else:
         return option
 
 
 def mainMenu() -> int:
-    """Main menu controller
-    """
+    """Main menu controller"""
 
     menuPrinter()
-    while(True):
+    while True:
         option = menuOptionCast()
 
         if option == -1:
@@ -87,11 +83,11 @@ def mainMenu() -> int:
         if validOption == -1:
             continue
 
-        return validOption        
+        return validOption
 
 
-def encryptFoo(text : str, key : int, lowerCase : list) -> str:
-    """ Crypting function. Basically it uses caesar cipher method.
+def encryptFoo(text: str, key: int, lowerCase: list) -> str:
+    """Crypting function. Basically it uses caesar cipher method.
     If it exceeds the lowercase alphabet, basically it makes some modulo operation.
     """
 
@@ -108,9 +104,8 @@ def encryptFoo(text : str, key : int, lowerCase : list) -> str:
     return crypted
 
 
-def decryptFoo(text : str, key : int, lowerCase : list) -> str:
-    """ Derypting function. Reverse of the encrypt function
-    """
+def decryptFoo(text: str, key: int, lowerCase: list) -> str:
+    """Derypting function. Reverse of the encrypt function"""
 
     decrypted = ""
 
@@ -127,8 +122,7 @@ def decryptFoo(text : str, key : int, lowerCase : list) -> str:
 
 
 def noChoiceAction() -> int:
-    """When user do not like the result of trimmed string, this function is called
-    """
+    """When user do not like the result of trimmed string, this function is called"""
 
     try:
         print("*" * 23)
@@ -136,22 +130,21 @@ def noChoiceAction() -> int:
         print("\n" + "*" * 23)
         noCase = int(input("\nChoose an option: "))
         print("")
-        
+
         if noCase == 1 or noCase == 2:
             return noCase
-        
+
         else:
             print("Wrong option!")
             return -1
-        
+
     except:
         print("Wrong option!")
         return -2
-    
 
-def cleanText(text : str) -> str:
-    """Convert input text to lowercase characters.
-    """
+
+def cleanText(text: str) -> str:
+    """Convert input text to lowercase characters."""
 
     text = re.sub("[^a-zA-Z]", "", text)
     text = text.lower().strip()
@@ -160,18 +153,19 @@ def cleanText(text : str) -> str:
 
 
 def getText() -> str:
-    """Getting the input text and clean it for the encryption or decryption.
-    """
+    """Getting the input text and clean it for the encryption or decryption."""
 
-    while (True):
-        text = input("Enter the text as adjacent lowercase characters (or it will be lowercased and truncated): ")
+    while True:
+        text = input(
+            "Enter the text as adjacent lowercase characters (or it will be lowercased and truncated): "
+        )
         text = cleanText(text)
 
         textConfirmation = input(f"\nText will be: {text}\nIs it okay? (y/n): ")
         print("")
-        if textConfirmation == "y" or textConfirmation == '\n':
+        if textConfirmation == "y" or textConfirmation == "\n":
             return text
-        
+
         noChoice = noChoiceAction()
         if noChoice == -1 or noChoice == -2:
             noChoice = noChoiceAction()
@@ -183,8 +177,7 @@ def getText() -> str:
 
 
 def getKey() -> int:
-    """ Getting the proper key until the proper key is entered.
-    """
+    """Getting the proper key until the proper key is entered."""
 
     key = int(input("Enter the key: "))
     keyList = [314, 271, 161, 662]
@@ -194,20 +187,18 @@ def getKey() -> int:
         key = int(input("Re-enter the key: "))
 
     print("")
-    return key    
+    return key
 
 
 def copyClipBoard(text):
-    """Copy result to the clipboard.
-    """
+    """Copy result to the clipboard."""
 
-    command = 'echo '+ text + '|clip'
+    command = "echo " + text + "|clip"
     return subprocess.check_call(command, shell=True)
 
 
 def main():
-    """Main function for processing all the functions
-    """
+    """Main function for processing all the functions"""
     cryptOption = mainMenu()
     lowerCase = list(string.ascii_lowercase)
 
@@ -219,10 +210,14 @@ def main():
 
         crypted = encryptFoo(text, key, lowerCase)
 
-        print(f"Crypted text: {crypted}")
-        input("Press enter to copy crypted text to the clipboard and go to the menu.")
-
-        copyClipBoard(crypted)
+        print(f"Crypted Text: {crypted}\n")
+        if platform.system() == "Windows":
+            input(
+                "Press enter to copy crypted text to the clipboard and go to the menu."
+            )
+            copyClipBoard(crypted)
+        else:
+            input("Press enter to go to the menu ")
         main()
 
     else:
@@ -233,13 +228,16 @@ def main():
 
         decrypted = decryptFoo(text, key, lowerCase)
 
-        print(f"Derypted text: {decrypted}")
-        input("Press enter to copy decrypted text to the clipboard and go to the menu.")
-        
-        copyClipBoard(decrypted)
+        print(f"Derypted Text: {decrypted}\n")
+        if platform.system() == "Windows":
+            input(
+                "Press enter to copy decrypted text to the clipboard and go to the menu."
+            )
+            copyClipBoard(decrypted)
+        else:
+            input("Press enter to go to the menu ")
         main()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
-
