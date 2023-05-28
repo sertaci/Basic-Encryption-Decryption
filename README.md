@@ -1,4 +1,4 @@
-# Basic-Encryption-Decryption
+# Enhanced Caesar Cipher
 
 ![2L](https://github.com/sertaci/Basic-Encryption-Decryption/assets/74237094/6facd2b3-4dca-4f52-8e57-b462ee4aa8a3)
 &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; &emsp; ![image](https://github.com/sertaci/Basic-Encryption-Decryption/assets/74237094/4e212e36-5e19-40f7-8d32-04c688b1540a)
