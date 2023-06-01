@@ -32,7 +32,6 @@ class EtTuBrute():
     def __init__(self):
         self._keyList = [314, 271, 161, 662]
         self._lowerCase = list(string.ascii_lowercase)
-        print( self._lowerCase)
 
 
     def menuPrinter(self):
