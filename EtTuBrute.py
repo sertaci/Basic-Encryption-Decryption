@@ -25,13 +25,14 @@ import re
 import subprocess
 import platform
 
- 
+
 class EtTuBrute():
     _keyList = []
     _lowerCase = []
     def __init__(self):
         self._keyList = [314, 271, 161, 662]
         self._lowerCase = list(string.ascii_lowercase)
+        print( self._lowerCase)
 
 
     def menuPrinter(self):
@@ -105,7 +106,7 @@ class EtTuBrute():
         for i in text:
             a = ord(i) + (key % 26)
             if a > 122:
-                crypted += lowerCase[a % 122]
+                crypted += lowerCase[a % 122-1]
 
             else:
                 crypted += chr(a)
@@ -122,7 +123,7 @@ class EtTuBrute():
             a = ord(i) - (key % 26)
 
             if a < 97:
-                decrypted += lowerCase[122 - (97 % a) - 97]
+                decrypted += lowerCase[26 - (97 % a)]
 
             else:
                 decrypted += chr(a)
