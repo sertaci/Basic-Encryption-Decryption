@@ -115,7 +115,7 @@ class EtTuBrute():
         return text
 
 
-    def getSpaceOpt(self) -> bool:
+    def getSpaceOption(self) -> bool:
         spaceOptConf = input("\nDo you want whitespace characters to be deleted? (y/n): ")
         print("")
 
@@ -134,7 +134,7 @@ class EtTuBrute():
             text = input(
                 "Enter the text as lowercase characters (or it will be lowercased): "
             )
-            spaceOpt = self.getSpaceOpt()
+            spaceOpt = self.getSpaceOption()
             text = self.cleanText(text, spaceOpt)
 
             textConfirmation = input(f"\nText will be: {text}\nIs it okay? (y/n): ")
